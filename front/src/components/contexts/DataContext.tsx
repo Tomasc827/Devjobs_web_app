@@ -6,9 +6,12 @@ type DataContextType = {
     setError: (error: string) => void;
     success: string;
     setSuccess: (error: string) => void;
-    isloading: boolean;
-    setIsLoading: (isLoading: boolean) => void;
-
+    isLoading: boolean;
+    setisLoading: (isLoading: boolean) => void;
+    isDarkMode: boolean;
+    setIsDarkMode: (isDarkMode: boolean) => void;
+    timeoutForError: (message:string) => void;
+    timeoutForSuccess: (message:string) => void;
 }
 
 const DataContext = createContext<DataContextType>({
@@ -17,8 +20,12 @@ const DataContext = createContext<DataContextType>({
     setError: () => {},
     success: "",
     setSuccess: () => {},
-    isloading: false,
-    setIsLoading: () => {}
+    isLoading: false,
+    setisLoading: () => {},
+    isDarkMode: false,
+    setIsDarkMode: () => {},
+    timeoutForError: () => {},
+    timeoutForSuccess:() => {}
 });
 
 export const useDataContext = () => {
@@ -29,11 +36,25 @@ export const DataProvider = ({children}: {children: ReactNode}) => {
     const url: string = "http://localhost:8080";
     const [error, setError] = useState<string>("");
     const [success, setSuccess] = useState<string>("");
-    const [isloading, setIsLoading] = useState<boolean>(false)
+    const [isLoading, setisLoading] = useState<boolean>(false)
+    const [isDarkMode,setIsDarkMode] = useState<boolean>(false)
+
+    const timeoutForError = (message: string) => {
+        setError(message)
+        setTimeout(() => {
+            setError("")
+        },2500)
+    }
+    const timeoutForSuccess = (message:string) => {
+        setSuccess(message)
+        setTimeout(() => {
+            setSuccess("")
+        },2000)
+    }
 
 
     return (
-        <DataContext.Provider value={{url,error,setError,success, setSuccess, isloading, setIsLoading}}>
+        <DataContext.Provider value={{url,error,setError,success, setSuccess, isLoading, setisLoading,timeoutForError,timeoutForSuccess,isDarkMode,setIsDarkMode}}>
             {children}
         </DataContext.Provider>
     )

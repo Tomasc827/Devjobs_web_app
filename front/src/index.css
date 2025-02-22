@@ -1,13 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-
-@layer base {
-    body {
-        @apply min-h-screen z-0 bg-gray-100
-    }
-
-}
 
 @theme {
     --breakpoint-phone: 375px;
@@ -20,20 +13,24 @@
      @apply border-0 border-b-[2.5px] border-b-blue-500 p-1 focus:border-purple-600 caret-purple-600 focus:shadow-inner focus:shadow-purple-500 focus:rounded-xl duration-500 px-4
     }
     .tomas-select {
-        @apply focus:border-b-purple-500 border-b-[2.5px] border-transparent rounded-xl focus:border-purple-600 focus:shadow-inner focus:shadow-purple-500 focus:rounded-xl duration-500 
+        @apply focus:border-b-purple-500 border-b-[2.5px] border-transparent rounded-xl focus:border-purple-600 focus:shadow-inner focus:shadow-purple-500 focus:rounded-xl 
     }
     .tomas-label {
         @apply  pt-5  
     }
     .tomas-button {
-        @apply bg-gradient-to-br from-purple-500 to-blue-500 p-5 rounded-2xl max-w-[10rem] cursor-pointer text-white font-semibold hover:shadow-2xl hover:shadow-purple-500 duration-500
+        @apply bg-gradient-to-br from-purple-500 to-blue-500 p-5 rounded-2xl max-w-[10rem] cursor-pointer text-white font-semibold hover:shadow-2xl hover:shadow-purple-500 duration-500 min-w-[7rem] border-transparent border-2 hover:border-amber-500 hover:border-2
     }
+    .tomas-navbar-button {
+        @apply text-white min-w-[3rem] cursor-pointer hover:bg-white/20 duration-500 p-2 rounded-2xl ms-2 text-xl
+    }
+
   }
 
-  .inter {
-    font-family: "Inter", serif;
+  .outfit {
+    font-family: "Outfit", serif;
     font-optical-sizing: auto;
-    font-weight: weight;
+    font-weight: 600;
     font-style: normal;
   }
 
@@ -58,3 +55,14 @@ select {
 ::placeholder {
     padding-left: 5px;
 }
+
+.bg-waves {
+    background-image: url('/src/assets/bg-waves.webp');
+  }
+
+  .fg-navbar-color {
+    background-color: rgb(89, 100, 224);
+  }
+  .dark-card-color {
+    background-color: #19202e;
+  }

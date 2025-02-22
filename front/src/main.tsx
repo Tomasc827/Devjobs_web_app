@@ -6,6 +6,7 @@ import App from './App'
 import { AuthProvider } from './components/contexts/AuthContext'
 import { DataProvider } from './components/contexts/DataContext'
 import Registration from './components/authentication/Registration'
+import Login from './components/authentication/login'
 
 createRoot(document.getElementById('root')!).render(
   
@@ -17,6 +18,7 @@ createRoot(document.getElementById('root')!).render(
       <Route path='/' element={<App/>}>
 
       <Route path='/registration' element={<Registration/>} />
+      <Route path="/login" element={<Login/>} />
       </Route>
     </Routes>
     </DataProvider>

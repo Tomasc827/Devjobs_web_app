@@ -24,11 +24,11 @@ const Registration = () => {
     formState: { errors },
     handleSubmit,
   } = useForm<RegistrationInputs>();
-  const { url, setIsLoading, setError } = useDataContext();
+  const { url, setisLoading, timeoutForError,isDarkMode } = useDataContext();
   const navigate = useNavigate();
 
   const postUserData = async (data: UserData) => {
-    setIsLoading(true);
+    setisLoading(true);
     try {
       const changedData = {
         ...data,
@@ -43,30 +43,22 @@ const Registration = () => {
       });
         switch (response.status) {
             case 401: 
-            setError("Unauthorized")
-            break;
+            timeoutForError("Unauthorized")
+            return;
             case 400:
-                setError("Bad Request")
+                timeoutForError("Bad Request")
+                return;
         }
 
-      if (!response.ok) {
-        setTimeout(() => {
-          setError("");
-        }, 2500);
-        return;
-      }
          await response.json();
       reset();
       setTimeout(() => {
         navigate("/login")
       },1200)
     } catch (error) {
-      setError(error);
-      setTimeout(() => {
-        setError("");
-      }, 2500);
+      timeoutForError(error);
     } finally {
-      setIsLoading(false);
+      setisLoading(false);
     }
   };
 
@@ -74,13 +66,13 @@ const Registration = () => {
     <>
     <ErrorServer/>
       <div className="flex flex-col justify-center items-center min-h-screen">
-        <form onSubmit={handleSubmit(postUserData)} className="pt-5 flex items-center flex-col phone:w-[20rem] tablet:w-[25rem] desktop:w-[30rem]  bg-white rounded-2xl">
+        <form onSubmit={handleSubmit(postUserData)} className={`pt-5 flex items-center flex-col phone:w-[20rem] tablet:w-[25rem] desktop:w-[30rem]   rounded-2xl  ${isDarkMode ? "dark-card-color text-white duration-500" : "bg-white text-black duration-500"}`}>
           <p className="text-3xl font-semibold ">
             Registration
           </p>
-          <label className="tomas-label inter">Name: </label>
+          <label className="tomas-label outfit">Name: </label>
           <input
-            className="tomas-input"
+            className={`tomas-input ${isDarkMode ? "placeholder:text-white duration-500" : "placeholder:text-gray-500 duration-500"}`}
             type="text"
             placeholder="ex: Johnny Bravo"
             {...register("name", {
@@ -92,10 +84,10 @@ const Registration = () => {
               },
             })}
           ></input>
-          {errors && <p className="text-sm inter text-red-500">{errors.name?.message}</p>}
-          <label className="tomas-label inter">Email: </label>
+          {errors && <p className="text-sm outfit text-red-500">{errors.name?.message}</p>}
+          <label className="tomas-label outfit">Email: </label>
           <input
-            className="tomas-input"
+            className={`tomas-input ${isDarkMode ? "placeholder:text-white duration-500" : "placeholder:text-gray-500 duration-500"}`}
             type="text"
             placeholder="ex: Johnny@Bravo.com"
             {...register("email", {
@@ -108,10 +100,10 @@ const Registration = () => {
               },
             })}
           ></input>
-          {errors && <p className="text-sm inter text-red-500">{errors.email?.message}</p>}
-          <label className="tomas-label inter">Password: </label>
+          {errors && <p className="text-sm outfit text-red-500">{errors.email?.message}</p>}
+          <label className="tomas-label outfit">Password: </label>
           <input
-            className="tomas-input"
+           className={`tomas-input ${isDarkMode ? "placeholder:text-white duration-500" : "placeholder:text-gray-500 duration-500"}`}
             type="password"
             placeholder="ex: *******"
             {...register("password", {
@@ -124,16 +116,16 @@ const Registration = () => {
               },
             })}
           ></input>
-          {errors && <p className="text-sm inter text-red-500 text-center">{errors.password?.message}</p>}
-          <label className="tomas-label inter">Choose what you are looking for:</label>
-          <select defaultValue="" className="inter tomas-select cursor-pointer " {...register("userPosition", {
+          {errors && <p className="text-sm outfit text-red-500 text-center">{errors.password?.message}</p>}
+          <label className="tomas-label outfit">Choose what you are looking for:</label>
+          <select defaultValue="" className={`outfit tomas-select cursor-pointer mb-5 ${isDarkMode ? "dark-card-color" : "text-gray-500"}`} {...register("userPosition", {
             required:"Type is required"
           })}>
-            <option className="text-center" disabled value="">Type</option>
-            <option value="JOBSEEKER">Looking For Work</option>
+            <option className={`text-center ${isDarkMode ? "" : "text-gray-500"}`} disabled value="">Choose From Dropdown</option>
+            <option value="JOBSEEKER" className="hover:bg-red-500">Looking For Work</option>
             <option value="COMPANY">Looking For Workers</option>
           </select>
-          {errors && <p className="text-sm inter text-red-500 text-center">{errors.userPosition?.message}</p>}
+          {errors && <p className="text-sm outfit text-red-500 text-center">{errors.userPosition?.message}</p>}
           <div>
           <button className="tomas-button me-10" type="submit">Submit</button>
           <button className="tomas-button mb-5" onClick={() => navigate(-1)}>Go Back</button>
