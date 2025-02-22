@@ -1,10 +1,13 @@
+import { Outlet } from "react-router"
+import ErrorServer from "./components/messages/ErrorServer"
 
 function App() {
 
 
   return (
     <>
-    <p className="text-8xl">Hello</p>
+    <ErrorServer/>
+    <Outlet/>
     </>
   )
 }
