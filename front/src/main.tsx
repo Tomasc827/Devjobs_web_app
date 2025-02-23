@@ -7,6 +7,7 @@ import { AuthProvider } from './components/contexts/AuthContext'
 import { DataProvider } from './components/contexts/DataContext'
 import Registration from './components/authentication/Registration'
 import Login from './components/authentication/login'
+import SearchBar from './components/job-ads/SearchBar'
 
 createRoot(document.getElementById('root')!).render(
   
@@ -16,7 +17,7 @@ createRoot(document.getElementById('root')!).render(
       <DataProvider>
     <Routes>
       <Route path='/' element={<App/>}>
-
+      <Route index element={<SearchBar/>}/>
       <Route path='/registration' element={<Registration/>} />
       <Route path="/login" element={<Login/>} />
       </Route>

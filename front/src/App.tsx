@@ -12,7 +12,7 @@ function App() {
 
   return (
     <>
-    <div className={`min-h-screen z-0 duration-500 ${isDarkMode ? "bg-gray-900" : "bg-gray-100"}`}>
+    <div className={`pb-10 min-h-screen z-0 duration-500 ${isDarkMode ? "bg-gray-900" : "bg-gray-100"}`}>
     {isLoading && <Loading/>}
     <Navbar/>
     <Success/>

@@ -10,6 +10,8 @@ type DataContextType = {
     setisLoading: (isLoading: boolean) => void;
     isDarkMode: boolean;
     setIsDarkMode: (isDarkMode: boolean) => void;
+    updateHomepage: number;
+    setUpdateHomepage: (updateHomepage: number) => void;
     timeoutForError: (message:string) => void;
     timeoutForSuccess: (message:string) => void;
 }
@@ -24,6 +26,8 @@ const DataContext = createContext<DataContextType>({
     setisLoading: () => {},
     isDarkMode: false,
     setIsDarkMode: () => {},
+    updateHomepage: 0,
+    setUpdateHomepage: () => {},
     timeoutForError: () => {},
     timeoutForSuccess:() => {}
 });
@@ -38,6 +42,7 @@ export const DataProvider = ({children}: {children: ReactNode}) => {
     const [success, setSuccess] = useState<string>("");
     const [isLoading, setisLoading] = useState<boolean>(false)
     const [isDarkMode,setIsDarkMode] = useState<boolean>(false)
+    const [updateHomepage,setUpdateHomepage] = useState<number>(0);
 
     const timeoutForError = (message: string) => {
         setError(message)
@@ -54,7 +59,7 @@ export const DataProvider = ({children}: {children: ReactNode}) => {
 
 
     return (
-        <DataContext.Provider value={{url,error,setError,success, setSuccess, isLoading, setisLoading,timeoutForError,timeoutForSuccess,isDarkMode,setIsDarkMode}}>
+        <DataContext.Provider value={{url,error,setError,success, setSuccess, isLoading, setisLoading,timeoutForError,timeoutForSuccess,isDarkMode,setIsDarkMode,updateHomepage,setUpdateHomepage}}>
             {children}
         </DataContext.Provider>
     )

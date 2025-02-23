@@ -15,13 +15,13 @@ const Loading = () => {
         },350)
         return () => clearInterval(interval);
     })
-
     return ( <>
-    <div className="bg-black min-h-screen opacity-30 flex justify-center items-center">
+    <div className="fixed z-[100] bg-black/30 min-h-screen min-w-screen  flex justify-center items-center">
         <div>
         <p className="text-5xl text-white">Loading{isLoading && dots}</p>
         </div>
     </div>
+
     </> );
 }
  

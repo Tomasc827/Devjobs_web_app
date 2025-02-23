@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lt.TomasC.Devjobs_web_app.model.UserPosition;
+import lt.TomasC.Devjobs_web_app.validation.ValidImage;
+import org.springframework.web.multipart.MultipartFile;
 
 public record UserRequestDTO(
         @NotNull(message = "Name cannot be null")
@@ -26,7 +28,9 @@ public record UserRequestDTO(
         )
         String password,
         @NotNull(message = "User position cannot be null")
-        UserPosition userPosition
+        UserPosition userPosition,
+        @ValidImage(message = "Invalid image file")
+                MultipartFile avatar
 ) {
 
 

@@ -62,7 +62,7 @@ const Login = () => {
           </p>
           <label className="tomas-label outfit">Email: </label>
           <input
-             className={`tomas-input ${isDarkMode ? "placeholder:text-white duration-500" : "placeholder:text-gray-500 duration-500"}`}
+             className={`tomas-input  ${isDarkMode ? "placeholder:text-white/50 duration-500" : " placeholder:text-gray-500 duration-500"}`}
             type="text"
             placeholder="ex: Johnny@Bravo.com"
             {...register("email", {
@@ -78,7 +78,7 @@ const Login = () => {
           {errors && <p className="text-sm outfit text-red-500">{errors.email?.message}</p>}
           <label className="tomas-label outfit">Password: </label>
           <input
-             className={`tomas-input mb-10 ${isDarkMode ? "placeholder:text-white duration-500" : "placeholder:text-gray-500 duration-500"}`}
+             className={`tomas-input mb-10 ${isDarkMode ? "placeholder:text-white/50 duration-500" : "placeholder:text-gray-500 duration-500"}`}
             type="password"
             placeholder="ex: *******"
             {...register("password", {

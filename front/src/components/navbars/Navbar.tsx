@@ -2,10 +2,14 @@ import DarkModeToggle from "./DarkModeToggle";
 import { useEffect, useState } from "react";
 import AuthButtons from "./AuthButtons";
 import { useNavigate } from "react-router";
+import AdPostModal from "../modals/AdPostModal";
 
 
 const Navbar = () => {
     const [isMenuOpen,setIsMenuOpen] = useState<boolean>()
+    const [isModalOpen,setIsModalOpen] = useState<boolean>()
+
+
     const navigate = useNavigate()
     useEffect(() => {
         const handleResize = () => {
@@ -20,14 +24,25 @@ const Navbar = () => {
 
     useEffect(() => {
         setIsMenuOpen(false);
+        setIsModalOpen(false);
     }, [navigate]);
 
     return (
-        <div className="fixed top-0 left-0 right-0 z-50"> 
-            <div className="relative bg-waves bg-no-repeat bg-cover h-[8rem] rounded-bl-full">
-                <div className="absolute inset-0 w-full bg-[rgb(89,100,224)]/70 rounded-bl-full">
+        <>
+        {isModalOpen && <AdPostModal setIsModalOpen={setIsModalOpen}/>}
+        {isMenuOpen && (
+                        
+                        <div className="w-[60%] md:hidden z-[39] border-2 border-purple-600  fixed top-[9rem] left-[20%] bg-[rgb(89,100,224)] shadow-lg shadow-purple-500 rounded-lg">
+                            <div className="flex flex-col items-center py-4 space-y-4">
+                            <AuthButtons setIsModalOpen={setIsModalOpen}/>
+                            </div>
+                        </div>
+                    )}
+        <div className="fixed top-0 left-0 right-0 z-20"> 
+            <div className="relative bg-waves bg-no-repeat bg-cover h-[8rem] tablet:rounded-bl-full">
+                <div className="absolute inset-0 w-full bg-[rgb(89,100,224)]/70 tablet:rounded-bl-full">
                     <div className="hidden md:flex flex-row-reverse pt-4 justify-center">
-                        <AuthButtons/>
+                        <AuthButtons setIsModalOpen={setIsModalOpen}/>
                     </div>
                     <button 
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -39,14 +54,6 @@ const Navbar = () => {
                             <span className={`block w-8 h-0.5 bg-white transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-2.5' : ''}`}></span>
                         </div>
                     </button>
-                    {isMenuOpen && (
-                        
-                        <div className="w-[60%] md:hidden absolute top-[9rem] left-[20%] bg-[rgb(89,100,224)] shadow-lg shadow-purple-500 rounded-lg">
-                            <div className="flex flex-col items-center py-4 space-y-4">
-                            <AuthButtons/>
-                            </div>
-                        </div>
-                    )}
                     <div className="absolute text-white font-semibold text-2xl left-[8%] top-1/2 -translate-y-1/2">
                         <p className="cursor-default">devjobs</p>
                     </div>
@@ -56,6 +63,7 @@ const Navbar = () => {
                 </div>
             </div>
         </div>
+        </>
     );
 }
 export default Navbar;

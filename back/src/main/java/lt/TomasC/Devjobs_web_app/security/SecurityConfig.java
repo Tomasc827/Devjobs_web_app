@@ -56,7 +56,12 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers(HttpMethod.POST,"/api/token").permitAll()
-                        .requestMatchers(HttpMethod.POST,"api/register").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/api/users/register").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/jobs/search").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/jobs/all").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/users/{userId}/avatar").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/users/avatar").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/jobs/locations").permitAll()
                         .anyRequest().authenticated()
 
                 );

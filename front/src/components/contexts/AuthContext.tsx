@@ -21,7 +21,7 @@ export const useAuth = () => {
 }
 
 export const AuthProvider = ({children}: {children: ReactNode}) => {
-    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!localStorage.getItem("jwt"))
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!localStorage.getItem("token"))
     const [userRoles, setUserRoles] = useState<string[]>(() => {
         const storedRoles = localStorage.getItem("roles");
         return storedRoles ? JSON.parse(storedRoles) : [];
@@ -38,7 +38,8 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
     }
 
     const logout = () => {
-        localStorage.clear();
+        localStorage.removeItem("token");
+        localStorage.removeItem("roles")
         setIsAuthenticated(false);
         setUserRoles([]);
     }

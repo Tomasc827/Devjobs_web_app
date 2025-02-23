@@ -32,9 +32,24 @@ public class User implements UserDetails {
     @Enumerated(value = EnumType.STRING)
     private UserPosition userPosition;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<JobAd> jobAds = new ArrayList<>();
+
     public User() {
 
     }
+
+    public List<JobAd> getJobAds() {
+        return jobAds;
+    }
+
+    public void setJobAds(List<JobAd> jobAds) {
+        this.jobAds = jobAds;
+    }
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "avatar_id")
+    private UserImage avatar;
 
     public UserPosition getUserPosition() {
         return userPosition;
@@ -42,6 +57,14 @@ public class User implements UserDetails {
 
     public void setUserPosition(UserPosition userPosition) {
         this.userPosition = userPosition;
+    }
+
+    public UserImage getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(UserImage avatar) {
+        this.avatar = avatar;
     }
 
     public Long getId() {
